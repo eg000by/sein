@@ -1,0 +1,41 @@
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+from .models import Value, UserValue, Goal
+from .serializers import ValueSerializer, UserValueSerializer, GoalSerializer, GoalCompleteSerializer
+
+
+
+
+class ValueViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Value.objects.all()
+    serializer_class = ValueSerializer
+    # permission_classes = [IsAuthenticated]
+
+class UserValueViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = UserValueSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return UserValue.objects.filter(user=self.request.user)
+
+class GoalViewSet(viewsets.ModelViewSet):
+    serializer_class = GoalSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Goal.objects.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+    @action(detail=True, methods=['patch'])
+    def complete(self, request, pk=None):
+        goal = self.get_object()
+        serializer = GoalCompleteSerializer(goal, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+    

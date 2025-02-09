@@ -1,0 +1,33 @@
+# Виртуальное окружение
+venv/
+.venv/
+
+# Файлы IDE
+.vscode/
+.idea/
+
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+db.sqlite3
+
+# Миграции (если не хотите их коммитить)
+*/migrations/*.py
+!*/migrations/__init__.py
+
+# Переменные окружения
+.env
+.env.local
+
+# Статика (если используете сборку)
+staticfiles/
+media/
+
+# Прочее
+*.swp
+*.swo
+
+# Heroku
+*.sqlite3
