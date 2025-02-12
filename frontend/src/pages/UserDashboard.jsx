@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getGoals, createGoal } from "../api/goals";
 import { logout } from "../api/auth"; 
-import api from "../api/auth";
+import { getUserValues } from "../api/values";
 
 const UserDashboard = () => {
     const [loading, setLoading] = useState(true);
@@ -15,7 +15,7 @@ const UserDashboard = () => {
         deadline: "",
         value: ""
     });
-    const [values, setValues] = useState([]);
+    const [userValues, setUserValues] = useState([]); // Переименовано с values
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -30,9 +30,9 @@ const UserDashboard = () => {
                 const goalsData = await getGoals();
                 setGoals(goalsData);
 
-                // Загрузка ценностей
-                const valuesResponse = await api.get('/values/');
-                setValues(valuesResponse.data);
+                // Загрузка ценностей пользователя
+                const valuesResponse = await getUserValues();
+                setUserValues(valuesResponse.map(uv => uv.value)); // Извлекаем value из UserVal
             } catch (error) {
                 setError("Ошибка загрузки данных");
             } finally {
@@ -64,6 +64,20 @@ const UserDashboard = () => {
     };
 
     if (loading) return <div className="p-4">Загрузка...</div>;
+
+    if (userValues.length === 0) {
+    return (
+        <div className="p-4">
+            <p className="text-red-500 mb-4">У вас не выбраны ценности!</p>
+            <button 
+                onClick={() => navigate('/select-values')}
+                className="bg-blue-500 text-white px-4 py-2 rounded"
+            >
+                Выбрать ценности
+            </button>
+        </div>
+    );
+}
 
     return (
         <div className="p-4 relative">
@@ -119,7 +133,7 @@ const UserDashboard = () => {
                                         onChange={(e) => setNewGoal({...newGoal, value: e.target.value})}
                                     >
                                         <option value="">Выберите ценность</option>
-                                        {values.map(value => (
+                                        {userValues.map(value => (
                                             <option key={value.id} value={value.id}>
                                                 {value.name}
                                             </option>
@@ -171,7 +185,7 @@ const UserDashboard = () => {
                             <p className="text-gray-600 mt-1">{goal.description}</p>
                             <div className="mt-2 flex justify-between items-center">
                                 <span className="text-sm text-gray-500">
-                                    Ценность: {values.find(v => v.id === goal.value)?.name}
+                                    Ценность: {userValues.find(v => v.id === goal.value)?.name}
                                 </span>
                                 <span className="text-sm text-gray-500">
                                     Дедлайн: {new Date(goal.deadline).toLocaleDateString()}
@@ -181,7 +195,7 @@ const UserDashboard = () => {
                     ))}
                 </div>
             )}
-        </div>
+        </div>  
     );
 };
 

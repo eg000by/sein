@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .models import Value, UserValue, Goal
 from .serializers import ValueSerializer, UserValueSerializer, GoalSerializer, GoalCompleteSerializer
-
+from django.core.exceptions import ValidationError
 
 
 
@@ -42,6 +42,9 @@ class GoalViewSet(viewsets.ModelViewSet):
         return Goal.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
+        value_id = serializer.validated_data['value'].id
+        if not UserValue.objects.filter(user=self.request.user, value_id=value_id).exists():
+            raise ValidationError("У вас нет доступа к этой ценности")
         serializer.save(user=self.request.user)
 
     @action(detail=True, methods=['patch'])
