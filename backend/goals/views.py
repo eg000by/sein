@@ -19,6 +19,20 @@ class UserValueViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         return UserValue.objects.filter(user=self.request.user)
+    
+    def create(self, request):
+        # Удаляем старые значения
+        UserValue.objects.filter(user=request.user).delete()
+        
+        # Создаем новые
+        values = request.data.get('values', [])
+        for value_id in values:
+            UserValue.objects.create(
+                user=request.user,
+                value_id=value_id,
+                points=1  # Начальные очки
+            )
+        return Response({'status': 'success'})
 
 class GoalViewSet(viewsets.ModelViewSet):
     serializer_class = GoalSerializer

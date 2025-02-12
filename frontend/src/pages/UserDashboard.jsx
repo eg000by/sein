@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getGoals } from "../api/goals";
-import { logout } from "../api/auth"; // Убедитесь, что функция logout существует в auth.js
+import { logout } from "../api/auth"; 
 
 const UserDashboard = () => {
     const [loading, setLoading] = useState(true);
