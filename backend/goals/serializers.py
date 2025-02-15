@@ -4,7 +4,7 @@ from .models import Value, UserValue, Goal
 class ValueSerializer(serializers.ModelSerializer):
     class Meta:
         model = Value
-        fields = ['id', 'name', 'color']
+        fields = ['id', 'name', 'color', 'icon']
 
 class UserValueSerializer(serializers.ModelSerializer):
     value = ValueSerializer(read_only=True)
