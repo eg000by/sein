@@ -27,6 +27,9 @@ class GoalSerializer(serializers.ModelSerializer):
             'completed_at'
         ]
         read_only_fields = ['user', 'status']
+        extra_kwargs = {
+            'status': {'required': True}
+        }
 
 class GoalCompleteSerializer(serializers.ModelSerializer):
     class Meta:

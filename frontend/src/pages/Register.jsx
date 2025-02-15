@@ -30,11 +30,6 @@ const Register = () => {
         }
     };
 
-      // Функция для перехода на страницу входа
-  const goToLogin = () => {
-    navigate("/login");
-  };
-
   return (
         <div className="p-4 max-w-md mx-auto">
             <h2 className="text-2xl font-bold mb-6 text-center">Регистрация</h2>
