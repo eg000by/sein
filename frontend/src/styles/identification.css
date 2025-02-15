@@ -15,7 +15,7 @@
   }
   
   /* Контейнер формы */
-  .login-container {
+  .auth-container {
     position: relative; /* Для использования псевдоэлемента */
     border-radius: 12px;
     padding: 8%;
@@ -23,9 +23,10 @@
     max-width: 400px;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
   }
   
-  .login-container::before {
+  .auth-container::before {
     content: ""; /* Псевдоэлемент для фона */
     position: absolute;
     top: 0;
@@ -39,7 +40,7 @@
   }
   
   /* Заголовок */
-  .login-title {
+  .auth-title {
     font-size: 1.5rem;
     font-weight: bold;
     color: #2c6e49;
@@ -47,7 +48,7 @@
   }
   
   /* Поля ввода */
-  .login-input {
+  .auth-input {
     width: 100%;
     padding: 1rem;
     margin-bottom: 1rem;
@@ -59,16 +60,25 @@
     transition: 0.3s;
   }
   
-  .login-input::placeholder {
+  .auth-input::placeholder {
     color: #4a7856;
   }
   
-  .login-input:focus {
+  .auth-input:focus {
     background: rgba(255, 255, 255, 1); /* Более четкий фон при фокусе */
+  }
+
+  .auth-label {
+    font-size: 1rem; /* Размер шрифта */
+    font-weight: 600; /* Жирное начертание */
+    color: #2c6e49; /* Цвет текста */
+    margin-bottom: 0.5rem; /* Отступ снизу для пространства между меткой и полем ввода */
+    margin-right: 0.5rem; /* Отступ справа, если метка будет рядом с полем */
+    vertical-align: middle; /* Чтобы выравнивать метку по центру относительно поля ввода */
   }
   
   /* Кнопка */
-  .login-button {
+  .auth-button {
     width: 100%;
     padding: 1rem;
     border: none;
@@ -81,49 +91,48 @@
     transition: 0.3s;
   }
   
-  .login-button:hover {
+  .auth-button:hover {
     background: #388e3c;
   }
   
   /* Ошибка */
-  .login-error {
+  .auth-error {
     margin-top: 10px;
     color: #d32f2f;
     font-size: 0.9rem;
   }
   
-  /* Блок "Ещё нет аккаунта?" */
-  .register-link {
+  /* Блок с ссылкой на регистрацию или вход */
+  .auth-register-link {
     margin-top: 1.5rem;
     font-size: 1rem;
     color: #4a7856;
   }
   
-  .register-link a {
+  .auth-register-link a {
     color: #007bff;
     text-decoration: none;
     font-weight: bold;
     transition: 0.3s;
   }
   
-  .register-link a:hover {
+  .auth-register-link a:hover {
     color: #0056b3;
     text-decoration: underline;
   }
   
   /* Адаптация для планшетов и десктопов */
   @media (min-width: 768px) {
-    .login-container {
-      width: 60%;
+    .auth-container {
       max-width: 450px;
       padding: 6%;
     }
   
-    .login-title {
+    .auth-title {
       font-size: 2rem;
     }
   
-    .login-button {
+    .auth-button {
       font-size: 1.4rem;
     }
   }

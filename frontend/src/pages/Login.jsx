@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { login } from "../api/auth";
 import "../styles/identification.css";
 
@@ -26,39 +26,40 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container">
-    <h2 className="login-title">Авторизация</h2>
-    <form onSubmit={handleLogin} className="login-form">
-      <input
-        type="text"
-        placeholder="Имя пользователя"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className="login-input"
-      />
-      <input
-        type="password"
-        placeholder="Пароль"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="login-input"
-      />
-      <button type="submit" className="login-button">
-        Войти
-      </button>
-    </form>
-    {message && <p className="login-error">{message}</p>}
+    <div className="auth-container">
+      <h2 className="auth-title">Авторизация</h2>
+      <form onSubmit={handleLogin} className="auth-form">
+        <input
+          type="text"
+          placeholder="Имя пользователя"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="auth-input"
+        />
+        <input
+          type="password"
+          placeholder="Пароль"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="auth-input"
+        />
+        <button type="submit" className="auth-button">
+          Войти
+        </button>
+      </form>
+      {message && <p className="auth-error">{message}</p>}
 
-    <div className="register-link">
-      <p>
-        Ещё нет аккаунта?{" "}
-        <Link to="/register" className="register-link-text">
-          Зарегистрируйтесь
-        </Link>
-      </p>
+      <div className="auth-register-link">
+        <p>
+          Ещё нет аккаунта?{" "}
+          <Link to="/register" className="auth-register-link-text">
+            Зарегистрируйтесь
+          </Link>
+        </p>
+      </div>
     </div>
-  </div>
   );
 };
 
 export default Login;
+
