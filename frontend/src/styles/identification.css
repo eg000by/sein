@@ -1,0 +1,96 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(160deg, #a8e6cf, #ffffff);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Контейнер формы */
+  .login-container {
+    background: rgba(255, 255, 255, 0.2); /* Полупрозрачность */
+    backdrop-filter: blur(10px); /* Эффект замыленного стекла */
+    border-radius: 12px;
+    padding: 8%;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Заголовок */
+  .login-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c6e49;
+    margin-bottom: 1rem;
+  }
+  
+  /* Поля ввода */
+  .login-input {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(5px);
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+  }
+  
+  .login-input::placeholder {
+    color: #4a7856;
+  }
+  
+  .login-input:focus {
+    background: rgba(255, 255, 255, 0.8);
+  }
+  
+  /* Кнопка */
+  .login-button {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: #4caf50;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .login-button:hover {
+    background: #388e3c;
+  }
+  
+  /* Ошибка */
+  .login-error {
+    margin-top: 10px;
+    color: #d32f2f;
+    font-size: 0.9rem;
+  }
+  
+  /* Адаптация для планшетов и десктопов */
+  @media (min-width: 768px) {
+    .login-container {
+      width: 60%;
+      max-width: 450px;
+      padding: 6%;
+    }
+  
+    .login-title {
+      font-size: 2rem;
+    }
+  
+    .login-button {
+      font-size: 1.4rem;
+    }
+  }
+  

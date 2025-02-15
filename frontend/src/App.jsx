@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import UserDashboard from "./pages/UserDashboard";
 import ValueSelection from "./pages/ValueSelection";
 import PrivateRoute from "./components/PrivateRoute";
+import "./styles/global.css";
 
 // function App() {
 //   return (
