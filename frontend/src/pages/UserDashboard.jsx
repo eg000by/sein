@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getGoals, createGoal, updateGoalStatus } from "../api/goals";
 import { logout } from "../api/auth"; 
 import { getUserValues } from "../api/values";
+import ValuesChart from "../components/ValuesChart";
 
 const UserDashboard = () => {
     const [loading, setLoading] = useState(true);
@@ -15,7 +16,8 @@ const UserDashboard = () => {
         deadline: "",
         value: ""
     });
-    const [userValues, setUserValues] = useState([]); // Переименовано с values
+    const [userValues, setUserValues] = useState([]);
+    const [values, setValues] = useState([]);
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -33,6 +35,7 @@ const UserDashboard = () => {
                 // Загрузка ценностей пользователя
                 const valuesResponse = await getUserValues();
                 setUserValues(valuesResponse.map(uv => uv.value)); // Извлекаем value из UserVal
+                setValues(valuesResponse)
             } catch (error) {
                 setError("Ошибка загрузки данных");
             } finally {
@@ -217,7 +220,7 @@ const UserDashboard = () => {
                         </div>
                     </div>
                     
-                    {/* Чекбокс */}
+                   
                     <label className="ml-4 flex items-center">
                         <input
                             type="checkbox"
@@ -230,6 +233,13 @@ const UserDashboard = () => {
             ))}
                 </div>
             )}
+
+            <div className="p-4">
+      <h2 className="text-xl font-bold mb-4">Прогресс по ценностям</h2>
+      <div className="max-w-md mx-auto">
+        <ValuesChart values={values} />
+      </div>
+    </div>
         </div>  
     );
 };
