@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getGoals, createGoal } from "../api/goals";
+import { getGoals, createGoal, updateGoalStatus } from "../api/goals";
 import { logout } from "../api/auth"; 
 import { getUserValues } from "../api/values";
 
@@ -60,6 +60,25 @@ const UserDashboard = () => {
             });
         } catch (error) {
             setError("Ошибка создания цели");
+        }
+    };
+
+    const handleStatusChange = async (goalId, currentStatus) => {
+        const newStatus = currentStatus === 'completed' ? 'active' : 'completed';
+        
+        try {
+            // Оптимистичное обновление
+            setGoals(prev => prev.map(goal => 
+                goal.id === goalId ? { ...goal, status: newStatus } : goal
+            ));
+            
+            await updateGoalStatus(goalId, newStatus);
+        } catch (error) {
+            // Откат при ошибке
+            setGoals(prev => prev.map(goal => 
+                goal.id === goalId ? { ...goal, status: currentStatus } : goal
+            ));
+            setError("Не удалось обновить статус цели");
         }
     };
 
@@ -180,19 +199,35 @@ const UserDashboard = () => {
             ) : (
                 <div className="space-y-4">
                     {goals.map((goal) => (
-                        <div key={goal.id} className="p-4 bg-white rounded shadow">
-                            <h3 className="font-semibold text-lg">{goal.title}</h3>
-                            <p className="text-gray-600 mt-1">{goal.description}</p>
-                            <div className="mt-2 flex justify-between items-center">
-                                <span className="text-sm text-gray-500">
-                                    Ценность: {userValues.find(v => v.id === goal.value)?.name}
-                                </span>
-                                <span className="text-sm text-gray-500">
-                                    Дедлайн: {new Date(goal.deadline).toLocaleDateString()}
-                                </span>
-                            </div>
+                <div key={goal.id} className="p-4 bg-white rounded shadow flex items-start">
+                    <div className="flex-1">
+                        <h3 className="font-semibold text-lg">{goal.title}</h3>
+                        <p className="text-gray-600 mt-1">{goal.description}</p>
+                        <div className="mt-2 flex justify-between items-center">
+                            <span className={`px-2 py-1 rounded ${
+                                goal.status === 'completed' 
+                                    ? 'bg-green-100 text-green-800' 
+                                    : 'bg-blue-100 text-blue-800'
+                            }`}>
+                                {goal.status === 'completed' ? 'Выполнено' : 'Активно'}
+                            </span>
+                            <p className="text-sm text-gray-500">
+                                Дедлайн: {new Date(goal.deadline).toLocaleDateString()}
+                            </p>
                         </div>
-                    ))}
+                    </div>
+                    
+                    {/* Чекбокс */}
+                    <label className="ml-4 flex items-center">
+                        <input
+                            type="checkbox"
+                            checked={goal.status === 'completed'}
+                            onChange={() => handleStatusChange(goal.id, goal.status)}
+                            className="w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                        />
+                    </label>
+                </div>
+            ))}
                 </div>
             )}
         </div>  

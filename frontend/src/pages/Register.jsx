@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { register, login } from "../api/auth";
-import { useNavigate } from "react-router-dom";
-import { API_URL } from '../api/auth';
+import { useNavigate, Link } from "react-router-dom";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -70,6 +69,19 @@ const Register = () => {
                     {isSubmitting ? 'Регистрация...' : 'Зарегистрироваться'}
                 </button>
             </form>
+
+            <div className="mt-4 text-center">
+            <p className="text-gray-600">
+                Уже есть аккаунт?{' '}
+                <Link 
+                to="/login" 
+                className="text-blue-500 hover:text-blue-600 underline"
+                >
+                Войдите
+                </Link>
+            </p>
+            </div>
+
         </div>
     );
 };
