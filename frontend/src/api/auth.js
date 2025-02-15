@@ -6,8 +6,6 @@ export const register = async (username, password) => {
   const response = await axios.post(`${API_URL}/auth/register/`, {
     username,
     password,
-  }, {
-    withCredentials: true // Важно для работы сессий
   });
   return response.data;
 };

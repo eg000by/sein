@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { login } from "../api/auth";
+import "../styles/identification.css";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -25,30 +26,40 @@ const Login = () => {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Авторизация</h2>
-      <form onSubmit={handleLogin}>
+    <div className="auth-container">
+      <h2 className="auth-title">Авторизация</h2>
+      <form onSubmit={handleLogin} className="auth-form">
         <input
           type="text"
           placeholder="Имя пользователя"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="border p-2 rounded mb-2 w-full"
+          className="auth-input"
         />
         <input
           type="password"
           placeholder="Пароль"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="border p-2 rounded mb-2 w-full"
+          className="auth-input"
         />
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
+        <button type="submit" className="auth-button">
           Войти
         </button>
       </form>
-      {message && <p className="mt-2 text-red-500">{message}</p>}
+      {message && <p className="auth-error">{message}</p>}
+
+      <div className="auth-register-link">
+        <p>
+          Ещё нет аккаунта?{" "}
+          <Link to="/register" className="auth-register-link-text">
+            Зарегистрируйтесь
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };
 
 export default Login;
+

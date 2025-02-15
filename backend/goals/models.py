@@ -42,11 +42,11 @@ class Goal(models.Model):
     completed_at = models.DateTimeField(null=True, blank=True)
 
     # SMART-поля
-    specific = models.TextField(verbose_name="Конкретность")
-    measurable = models.TextField(verbose_name="Измеримость")
-    achievable = models.TextField(verbose_name="Достижимость")
-    relevant = models.TextField(verbose_name="Актуальность")
-    time_bound = models.TextField(verbose_name="Сроки")
+    # specific = models.TextField(verbose_name="Конкретность")
+    # measurable = models.TextField(verbose_name="Измеримость")
+    # achievable = models.TextField(verbose_name="Достижимость")
+    # relevant = models.TextField(verbose_name="Актуальность")
+    # time_bound = models.TextField(verbose_name="Сроки")
 
     def __str__(self):
         return f"{self.user}: {self.title}"
@@ -55,7 +55,7 @@ class Goal(models.Model):
 def update_value_points(sender, instance, **kwargs):
     if instance.status == 'completed' and not instance.completed_at:
         user_value = UserValue.objects.get(user=instance.user, value=instance.value)
-        user_value.points += 100  # Или другая логика начисления
+        user_value.points += 1  # Или другая логика начисления
         user_value.save()
         instance.completed_at = timezone.now()
         instance.save(update_fields=['completed_at'])

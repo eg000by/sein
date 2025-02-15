@@ -1,0 +1,139 @@
+/* Общие стили */
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Устанавливаем минимальную высоту экрана */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(120deg, #a8e6cf, #ffffff);
+  }
+  
+  /* Контейнер формы */
+  .auth-container {
+    position: relative; /* Для использования псевдоэлемента */
+    border-radius: 12px;
+    padding: 8%;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+  }
+  
+  .auth-container::before {
+    content: ""; /* Псевдоэлемент для фона */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3); /* Полупрозрачный фон */
+    backdrop-filter: blur(10px); /* Эффект размытия фона */
+    border-radius: 12px; /* Сохраняем радиус скругления */
+    z-index: -1; /* Этот элемент будет позади содержимого */
+  }
+  
+  /* Заголовок */
+  .auth-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c6e49;
+    margin-bottom: 1rem;
+  }
+  
+  /* Поля ввода */
+  .auth-input {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9); /* Легкий фон с хорошей контрастностью */
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+  }
+  
+  .auth-input::placeholder {
+    color: #4a7856;
+  }
+  
+  .auth-input:focus {
+    background: rgba(255, 255, 255, 1); /* Более четкий фон при фокусе */
+  }
+
+  .auth-label {
+    font-size: 1rem; /* Размер шрифта */
+    font-weight: 600; /* Жирное начертание */
+    color: #2c6e49; /* Цвет текста */
+    margin-bottom: 0.5rem; /* Отступ снизу для пространства между меткой и полем ввода */
+    margin-right: 0.5rem; /* Отступ справа, если метка будет рядом с полем */
+    vertical-align: middle; /* Чтобы выравнивать метку по центру относительно поля ввода */
+  }
+  
+  /* Кнопка */
+  .auth-button {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    background: #4caf50;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .auth-button:hover {
+    background: #388e3c;
+  }
+  
+  /* Ошибка */
+  .auth-error {
+    margin-top: 10px;
+    color: #d32f2f;
+    font-size: 0.9rem;
+  }
+  
+  /* Блок с ссылкой на регистрацию или вход */
+  .auth-register-link {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: #4a7856;
+  }
+  
+  .auth-register-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .auth-register-link a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+  }
+  
+  /* Адаптация для планшетов и десктопов */
+  @media (min-width: 768px) {
+    .auth-container {
+      max-width: 450px;
+      padding: 6%;
+    }
+  
+    .auth-title {
+      font-size: 2rem;
+    }
+  
+    .auth-button {
+      font-size: 1.4rem;
+    }
+  }
+  
