@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import { login } from "../api/auth";
 
 const Login = () => {
@@ -47,6 +47,19 @@ const Login = () => {
         </button>
       </form>
       {message && <p className="mt-2 text-red-500">{message}</p>}
+
+      <div className="mt-4 text-center">
+        <p className="text-gray-600">
+          Ещё нет аккаунта?{' '}
+          <Link 
+            to="/register" 
+            className="text-blue-500 hover:text-blue-600 underline"
+            >
+          Зарегистрируйтесь
+            </Link>
+          </p>
+      </div>
+
     </div>
   );
 };
