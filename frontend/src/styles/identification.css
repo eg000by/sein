@@ -1,25 +1,41 @@
 /* Общие стили */
-body {
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(160deg, #a8e6cf, #ffffff);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Устанавливаем минимальную высоту экрана */
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
+    background: linear-gradient(120deg, #a8e6cf, #ffffff);
   }
   
   /* Контейнер формы */
   .login-container {
-    background: rgba(255, 255, 255, 0.2); /* Полупрозрачность */
-    backdrop-filter: blur(10px); /* Эффект замыленного стекла */
+    position: relative; /* Для использования псевдоэлемента */
     border-radius: 12px;
     padding: 8%;
     width: 90%;
     max-width: 400px;
     text-align: center;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-container::before {
+    content: ""; /* Псевдоэлемент для фона */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3); /* Полупрозрачный фон */
+    backdrop-filter: blur(10px); /* Эффект размытия фона */
+    border-radius: 12px; /* Сохраняем радиус скругления */
+    z-index: -1; /* Этот элемент будет позади содержимого */
   }
   
   /* Заголовок */
@@ -37,8 +53,7 @@ body {
     margin-bottom: 1rem;
     border: none;
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.9); /* Легкий фон с хорошей контрастностью */
     font-size: 1rem;
     outline: none;
     transition: 0.3s;
@@ -49,7 +64,7 @@ body {
   }
   
   .login-input:focus {
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 1); /* Более четкий фон при фокусе */
   }
   
   /* Кнопка */
@@ -75,6 +90,25 @@ body {
     margin-top: 10px;
     color: #d32f2f;
     font-size: 0.9rem;
+  }
+  
+  /* Блок "Ещё нет аккаунта?" */
+  .register-link {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: #4a7856;
+  }
+  
+  .register-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .register-link a:hover {
+    color: #0056b3;
+    text-decoration: underline;
   }
   
   /* Адаптация для планшетов и десктопов */

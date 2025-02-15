@@ -26,42 +26,38 @@ const Login = () => {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-xl font-bold mb-4">Авторизация</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="text"
-          placeholder="Имя пользователя"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="border p-2 rounded mb-2 w-full"
-        />
-        <input
-          type="password"
-          placeholder="Пароль"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="border p-2 rounded mb-2 w-full"
-        />
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-          Войти
-        </button>
-      </form>
-      {message && <p className="mt-2 text-red-500">{message}</p>}
+    <div className="login-container">
+    <h2 className="login-title">Авторизация</h2>
+    <form onSubmit={handleLogin} className="login-form">
+      <input
+        type="text"
+        placeholder="Имя пользователя"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        className="login-input"
+      />
+      <input
+        type="password"
+        placeholder="Пароль"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="login-input"
+      />
+      <button type="submit" className="login-button">
+        Войти
+      </button>
+    </form>
+    {message && <p className="login-error">{message}</p>}
 
-      <div className="mt-4 text-center">
-        <p className="text-gray-600">
-          Ещё нет аккаунта?{' '}
-          <Link 
-            to="/register" 
-            className="text-blue-500 hover:text-blue-600 underline"
-            >
+    <div className="register-link">
+      <p>
+        Ещё нет аккаунта?{" "}
+        <Link to="/register" className="register-link-text">
           Зарегистрируйтесь
-            </Link>
-          </p>
-      </div>
-
+        </Link>
+      </p>
     </div>
+  </div>
   );
 };
 
