@@ -207,13 +207,16 @@ const UserDashboard = () => {
                         <h3 className="font-semibold text-lg">{goal.title}</h3>
                         <p className="text-gray-600 mt-1">{goal.description}</p>
                         <div className="mt-2 flex justify-between items-center">
-                            <span className={`px-2 py-1 rounded ${
+                            <span className="text-sm text-gray-500">
+                                    Ценность: {userValues.find(v => v.id === goal.value)?.name}
+                                </span>
+                            <div className={`px-2 py-1 rounded ${
                                 goal.status === 'completed' 
                                     ? 'bg-green-100 text-green-800' 
                                     : 'bg-blue-100 text-blue-800'
                             }`}>
                                 {goal.status === 'completed' ? 'Выполнено' : 'Активно'}
-                            </span>
+                            </div>
                             <p className="text-sm text-gray-500">
                                 Дедлайн: {new Date(goal.deadline).toLocaleDateString()}
                             </p>
