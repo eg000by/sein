@@ -16,7 +16,16 @@ class UserValueSerializer(serializers.ModelSerializer):
 class GoalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Goal
-        fields = ['id', 'value', 'title', 'description', 'status', 'deadline']
+        fields = [
+            'id', 
+            'value', 
+            'title', 
+            'description', 
+            'status', 
+            'deadline', 
+            'created_at', 
+            'completed_at'
+        ]
         read_only_fields = ['user', 'status']
 
 class GoalCompleteSerializer(serializers.ModelSerializer):

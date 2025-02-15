@@ -42,11 +42,11 @@ class Goal(models.Model):
     completed_at = models.DateTimeField(null=True, blank=True)
 
     # SMART-поля
-    specific = models.TextField(verbose_name="Конкретность")
-    measurable = models.TextField(verbose_name="Измеримость")
-    achievable = models.TextField(verbose_name="Достижимость")
-    relevant = models.TextField(verbose_name="Актуальность")
-    time_bound = models.TextField(verbose_name="Сроки")
+    # specific = models.TextField(verbose_name="Конкретность")
+    # measurable = models.TextField(verbose_name="Измеримость")
+    # achievable = models.TextField(verbose_name="Достижимость")
+    # relevant = models.TextField(verbose_name="Актуальность")
+    # time_bound = models.TextField(verbose_name="Сроки")
 
     def __str__(self):
         return f"{self.user}: {self.title}"
