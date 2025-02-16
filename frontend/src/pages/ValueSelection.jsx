@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../api/auth';
 
+import '../styles/ValueSelectStyles.css'; // Подключаем стили
+
 const ValueSelection = () => {
     const [values, setValues] = useState([]);
     const [selectedValues, setSelectedValues] = useState([]);
@@ -27,9 +29,7 @@ const ValueSelection = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await api.post('/user/values/', {
-                values: selectedValues
-            });
+            await api.post('/user/values/', { values: selectedValues });
             navigate('/dashboard');
         } catch (err) {
             setError('Ошибка сохранения ценностей');
@@ -37,48 +37,43 @@ const ValueSelection = () => {
     };
 
     const handleCheckboxChange = (valueId) => {
-        setSelectedValues(prev => 
-            prev.includes(valueId) 
-                ? prev.filter(id => id !== valueId) 
+        setSelectedValues((prev) =>
+            prev.includes(valueId)
+                ? prev.filter((id) => id !== valueId)
                 : [...prev, valueId]
         );
     };
 
-    if (loading) return <div>Загрузка...</div>;
+    if (loading) return <div className="value-selection-container">Загрузка...</div>;
 
     return (
-        <div className="p-4 max-w-2xl mx-auto">
-            <h2 className="text-2xl font-bold mb-6">Выберите свои ценности</h2>
+    
+        <div className="value-selection-container">
+            <h2 className="value-selection-title">Выберите свои ценности</h2>
             <form onSubmit={handleSubmit}>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {values.map(value => (
-                        <label 
+                <div className="value-list">
+                    {values.map((value) => (
+                        <label
                             key={value.id}
-                            className={`p-4 rounded-lg border-2 cursor-pointer transition-colors
-                                ${selectedValues.includes(value.id) 
-                                    ? 'border-blue-500 bg-blue-50' 
-                                    : 'border-gray-200 hover:border-blue-300'}`}
+                            className={`value-item ${selectedValues.includes(value.id) ? 'selected' : ''}`}
                         >
                             <input
                                 type="checkbox"
-                                className="hidden"
+                                className="value-checkbox"
                                 checked={selectedValues.includes(value.id)}
                                 onChange={() => handleCheckboxChange(value.id)}
                             />
-                            <div className="flex items-center">
-                                <span className="text-lg font-medium">{value.name}</span>
-                            </div>
+                            <span className="value-text">{value.name}</span>
                         </label>
                     ))}
                 </div>
-                
-                {error && <p className="text-red-500 mt-4">{error}</p>}
-                
+
+                {error && <p className="value-error">{error}</p>}
+
                 <button
                     type="submit"
                     disabled={selectedValues.length === 0}
-                    className="mt-6 bg-blue-500 text-white px-6 py-2 rounded-lg
-                        hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                    className="value-submit"
                 >
                     Сохранить и продолжить
                 </button>

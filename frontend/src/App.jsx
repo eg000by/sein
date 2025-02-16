@@ -6,7 +6,6 @@ import UserDashboard from "./pages/UserDashboard";
 import ValueSelection from "./pages/ValueSelection";
 import PrivateRoute from "./components/PrivateRoute";
 import "./styles/global.css";
-// роутер
 export default function App() {
   return (
     <Router>
